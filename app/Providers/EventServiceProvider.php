@@ -8,8 +8,9 @@ use Illuminate\Auth\Events\CreateUserEvent;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Event;
-use App\Listeners\SendRemoveUserNotification;
-use App\Listeners\SendCreateUserNotification;
+use App\Listeners\SendRemoveUserSMS;
+use App\Listeners\SendRemoveUserEmail;
+use App\Listeners\SendCreateUserSMS;
 
 
 class EventServiceProvider extends ServiceProvider
@@ -24,10 +25,11 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         RemoveUserEvent::class => [
-            SendRemoveUserNotification::class,
+            SendRemoveUserSMS::class,
         ],
         CreateUserEvent::class => [
-            SendCreateUserNotification::class,
+            SendCreateUserSMS::class,
+            SendRemoveUserEmail::class
         ],
     ];
 
